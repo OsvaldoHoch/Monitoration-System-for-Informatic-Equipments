@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Monitoramento TI - Dinorah</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background-color: #0a2d6e;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .status-contador {
+            background-color: #f5b400;
+            color: #0a2d6e;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #052864;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+
+        tr {
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.2s;
+        }
+
+        tr:hover {
+            background-color: #f8fafd;
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        .online {
+            background-color: #e6f4ea;
+            color: #137333;
+        }
+
+        .offline {
+            background-color: #fce8e6;
+            color: #c5221f;
+        }
+
+        .erro-conexao {
+            background-color: #fce8e6;
+            color: #c5221f;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            font-weight: bold;
+            border: 1px solid #f5c2c7;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="msgErro" class="erro-conexao">
+        ⚠️ Não foi possível conectar ao servidor da API. Verifique se o IP está correto e se o servidor está rodando.
+    </div>
+
+    <header>
+        <h1>Monitoramento de Equipamentos de Informática</h1>
+        <div class="status-contador" id="totalMaquinas">Conectando...</div>
+    </header>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Computador (Hostname)</th>
+                <th>Professor(a)</th>
+                <th>Sala</th>
+                <th>Aluno(a)</th>
+                <th>Status Atual</th>
+            </tr>
+        </thead>
+        <tbody id="tabelaCorpo">
+            <tr>
+                <td colspan="5" style="text-align: center; color: #777;">Buscando dados do servidor...</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // ⚠️ SUBSTITUA PELO IP REAL DO SEU COMPUTADOR SERVIDOR (O que você pegou no ipconfig)
+    const IP_SERVIDOR = "192.168.137.3"; 
+    const URL_API = `http://192.168.137.3:5000/api/monitoramento/status`;
+
+    async function atualizarPainel() {
+        const tabelaCorpo = document.getElementById("tabelaCorpo");
+        const totalMaquinas = document.getElementById("totalMaquinas");
+        const msgErro = document.getElementById("msgErro");
+
+        try {
+            const response = await fetch(URL_API);
+            
+            if (!response.ok) throw new Error("Erro na resposta da API");
+
+            const dados = await response.json();
+            
+            // Oculta mensagem de erro se a conexão voltou a funcionar
+            msgErro.style.display = "none";
+
+            // Se não houver computadores registrados no banco
+            if (dados.length === 0) {
+                tabelaCorpo.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #777;">Nenhum notebook enviando sinal no momento.</td></tr>`;
+                totalMaquinas.textContent = "0 Máquinas Ativas";
+                return;
+            }
+
+            // Limpa a tabela para renderizar as novas linhas
+            tabelaCorpo.innerHTML = "";
+            let onlineCount = 0;
+
+            dados.forEach(maquina => {
+                const classeStatus = maquina.Status.toLowerCase() === "online" ? "online" : "offline";
+                if(maquina.Status.toLowerCase() === "online") onlineCount++;
+
+                const linha = document.createElement("tr");
+                linha.innerHTML = `
+                    <td><strong>${maquina.Hostname}</strong></td>
+                    <td>${maquina.Professor}</td>
+                    <td>${maquina.Sala}</td>
+                    <td>${maquina.Aluno}</td>
+                    <td><span class="badge ${classeStatus}">${maquina.Status}</span></td>
+                `;
+                tabelaCorpo.appendChild(linha);
+            });
+
+            totalMaquinas.textContent = `${onlineCount} Online de ${dados.length} monitoradas`;
+
+        } catch (error) {
+            console.error("Erro ao buscar dados:", error);
+            msgErro.style.display = "block";
+            totalMaquinas.textContent = "Erro de conexão";
+        }
+    }
+
+    // Executa a função imediatamente ao abrir a página
+    atualizarPainel();
+
+    // Configura para rodar e atualizar de forma automática a cada 5 segundos (5000ms)
+    setInterval(atualizarPainel, 5000);
+</script>
+
+</body>
+</html>
