@@ -176,23 +176,28 @@
                 const classeStatus = maquina.Status.toLowerCase() === "online" ? "online" : "offline";
                 if(maquina.Status.toLowerCase() === "online") onlineCount++;
 
+                totalMaquinas.style.backgroundColor = "#28a745"; // Verde
+                totalMaquinas.style.color = "white";
+
                 const linha = document.createElement("tr");
                 linha.innerHTML = `
                     <td><strong>${maquina.Hostname}</strong></td>
                     <td>${maquina.Professor}</td>
-                    <td>${maquina.Sala}</td>
+                    <td>${maquina.Turma}</td>
                     <td>${maquina.Aluno}</td>
                     <td><span class="badge ${classeStatus}">${maquina.Status}</span></td>
                 `;
                 tabelaCorpo.appendChild(linha);
             });
 
-            totalMaquinas.textContent = `${onlineCount} Online de ${dados.length} monitoradas`;
+            totalMaquinas.textContent = `${onlineCount} Online de ${dados.length} máquinas monitoradas`;
 
         } catch (error) {
             console.error("Erro ao buscar dados:", error);
             msgErro.style.display = "block";
             totalMaquinas.textContent = "Erro de conexão";
+            totalMaquinas.style.backgroundColor = "#dc3545"; // Vermelho
+            totalMaquinas.style.color = "white";
         }
     }
 
@@ -203,5 +208,6 @@
     setInterval(atualizarPainel, 5000);
 </script>
 
+</div>
 </body>
 </html>
