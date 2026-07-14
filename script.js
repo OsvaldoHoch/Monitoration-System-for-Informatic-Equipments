@@ -1,11 +1,11 @@
 // ⚠️ SUBSTITUA PELO IP REAL DO SEU COMPUTADOR SERVIDOR (O que você pegou no ipconfig)
-    const IP_SERVIDOR = "192.168.137.3"; 
-    const URL_API = `http://192.168.137.3:5000/api/monitoramento/status`;
+    const IP_SERVIDOR = "172.30.0.119"; 
+    const URL_API = `http://${IP_SERVIDOR}:5000/api/monitoramento/status`;
 
     async function atualizarPainel() {
         const tabelaCorpo = document.getElementById("tabelaCorpo");
         const totalMaquinas = document.getElementById("totalMaquinas");
-        const msgErro = document.getElementById("msgErro");
+        // const msgErro = document.getElementById("msgErro");
 
         try {
             const response = await fetch(URL_API);
@@ -15,11 +15,11 @@
             const dados = await response.json();
             
             // Oculta mensagem de erro se a conexão voltou a funcionar
-            msgErro.style.display = "none";
+            // msgErro.style.display = "none";
 
             // Se não houver computadores registrados no banco
             if (dados.length === 0) {
-                tabelaCorpo.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #777;">Nenhum notebook enviando sinal no momento.</td></tr>`;
+                A.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #777;">Nenhum notebook enviando sinal no momento.</td></tr>`;
                 totalMaquinas.textContent = "0 Máquinas Ativas";
                 return;
             }

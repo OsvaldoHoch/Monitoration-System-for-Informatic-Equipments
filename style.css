@@ -17,15 +17,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            top: 100px;
             right: 0;
             width: 85vw;
             margin: 0 0;
         }
 
         .header {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 85vw;
             background-color: #2d2d2d;
             color: white;
-            padding: 20px;
+            padding: 20px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -38,19 +43,38 @@
             left: 0;
             top: 0;
             height: 100%;
-            background-color: #052864;
+            background-image: linear-gradient(135deg, rgb(33, 75, 191), rgb(0, 44, 106));
             color: #f9f9f9;
             width: 15vw;
             padding: 20px;
+        }
+        .nav-sidebar li {
+            list-style: none;
+        }
+        .nav-a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 20px;
+            margin-left: 20px;
+            line-height: 50px;
+            font-weight: 400;
+        }
+        .nav-a:hover {
+            transition: all 0.2s ease;
+            transform: scale(1.025);
+            font-weight: 600;
+            text-decoration: dashed;
         }
 
         .main-content {
             padding: 50px 0 ;
         }
 
+        /* TABELA */
+
         .status-contador {
             background-color: #f5b400;
-            color: #0a2d6e;
+            color: #2d2d2d;
             padding: 8px 15px;
             border-radius: 20px;
             font-weight: bold;
@@ -117,4 +141,5 @@
             display: none;
             font-weight: bold;
             border: 1px solid #f5c2c7;
-        }      
+        }
+        
