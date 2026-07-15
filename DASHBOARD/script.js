@@ -1,11 +1,11 @@
-// ⚠️ SUBSTITUA PELO IP REAL DO SEU COMPUTADOR SERVIDOR (O que você pegou no ipconfig)
-    const IP_SERVIDOR = "172.30.0.119"; 
+    const IP_SERVIDOR = "MININT-CDV84OR.local";
+    const IP_SERVIDOR_ALT = "192.168.137.102";
     const URL_API = `http://${IP_SERVIDOR}:5000/api/monitoramento/status`;
 
     async function atualizarPainel() {
         const tabelaCorpo = document.getElementById("tabelaCorpo");
         const totalMaquinas = document.getElementById("totalMaquinas");
-        // const msgErro = document.getElementById("msgErro");
+        const msgErro = document.getElementById("msgErro");
 
         try {
             const response = await fetch(URL_API);
@@ -15,7 +15,7 @@
             const dados = await response.json();
             
             // Oculta mensagem de erro se a conexão voltou a funcionar
-            // msgErro.style.display = "none";
+            msgErro.style.display = "none";
 
             // Se não houver computadores registrados no banco
             if (dados.length === 0) {
@@ -62,3 +62,38 @@
 
     // Configura para rodar e atualizar de forma automática a cada 5 segundos (5000ms)
     setInterval(atualizarPainel, 5000);
+
+
+
+
+    // BARRA DE PESQUISA 
+    function filtrarTabela(){
+        // Transforma em letras minúsculas
+        let input = document
+            .getElementById("textInput");
+        let filtro = input
+            .value
+            .toLowerCase()
+            .trim();
+
+        let tabela = document.getElementById("tabela");
+        let linhas = tabela
+            .getElementsByTagName("tbody")[0]
+            .getElementsByTagName("tr");
+
+        for(let i = 0; i < linhas.length; i++) {
+            let colunaNome = linhas[i].getElementsByTagName("td")[0];
+            let colunaCargo = linhas[i].getElementsByTagName("td")[1];
+
+            if(colunaNome || colunaCargo) {
+                let textName = colunaNome.textContent || colunaNome.innerText;
+                let textCargo = colunaCargo.textContent || colunaCargo.innerText;
+
+                if(textName.toLowerCase().indexOf(filtro) > -1 || textCargo.toLowerCase().indexOf(filtro) > -1) {
+                    linhas[i].style.display=""; //Mostra a linha
+                } else {
+                    linhas[i].style.display = "none"; //Esconde a linha
+                }
+            }
+        }
+    }
