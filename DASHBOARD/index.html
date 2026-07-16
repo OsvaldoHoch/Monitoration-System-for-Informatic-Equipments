@@ -6,6 +6,16 @@
     <title>MSIE Dashboad</title>
     <link rel="stylesheet" href="style.css">
 </head>
+<style>
+    .selected {
+        z-index: 10;
+        position: absolute;
+        background-color: rgba(7, 0, 81, 0.25);
+        left: 0;
+        width: 15vw;
+        height: 50px;
+    }
+</style>
 <body>
     <header class="header">
         <h1>DASHBOARD</h1>
@@ -22,15 +32,16 @@
 
     
         <aside class="sidebar">
-            <img src="../imgs/LogoDinorah.png" width="200px" style="margin-left: -10px;" alt="">
+            <img src="../imgs/LogoDinorah.png" width="200px" style="margin-left: 10px;" alt="">
             <nav class="nav-sidebar">
                 <ul>
-                    <li><a class="nav-a" href="../DASHBOARD/index.html">DASHBOARD</a></li>
-                    <li><a class="nav-a" href="../COMPUTADORES/index.html">COMPUTADORES</a></li>
-                    <li><a class="nav-a" href="../COMPUTADORES/index.html">TURMAS</a></li>
-                    <li><a class="nav-a" href="../ALUNOS/index.html">ALUNOS</a></li>
-                    <li><a class="nav-a" href="../PROFESSORES/index.html">PROFESSORES</a></li>
-                    <li><a class="nav-a" href="../SAIBA-MAIS/index.html">SAIBA MAIS</a></li>
+                    <div class="selected"></div>
+                    <li><a class="nav-a" href="../DASHBOARD/index.html"><div class="nav-a-div">DASHBOARD</div></a></li>
+                    <li><a class="nav-a" href="../COMPUTADORES/index.html"><div class="nav-a-div">COMPUTADORES</div></a></li>
+                    <li><a class="nav-a" href="../COMPUTADORES/index.html"><div class="nav-a-div">TURMAS</div></a></li>
+                    <li><a class="nav-a" href="../ALUNOS/index.html"><div class="nav-a-div">ALUNOS</div></a></li>
+                    <li><a class="nav-a" href="../PROFESSORES/index.html"><div class="nav-a-div">PROFESSORES</div></a></li>
+                    <li><a class="nav-a" href="../SAIBA-MAIS/index.html"><div class="nav-a-div">SAIBA MAIS</div></a></li>
                 </ul>
             </nav>
         </aside>
@@ -38,6 +49,39 @@
     <div class="container">
         <main class="main-content">
             <div id="msgErro"></div>
+            <div class="filtros">
+                <div class="filtro-turmas-style">
+                    <select name="Turmas" id="filtroTurma" class="filtro">
+                        <option value="todas">Todas</option>
+                        <option value="6°Ano A">6ºAno A</option>
+                        <option value="6°Ano B">6ºAno B</option>
+                        <option value="6°Ano C">6ºAno C</option>
+                        <option value="6°Ano D">6ºAno D</option>
+                        <option value="7°Ano A">7ºAno A</option>
+                        <option value="7°Ano B">7ºAno B</option>
+                        <option value="7°Ano C">7ºAno C</option>
+                        <option value="8°Ano A">8ºAno A</option>
+                        <option value="8°Ano B">8ºAno B</option>
+                        <option value="8°Ano C">8ºAno C</option>
+                        <option value="9°Ano A">9ºAno A</option>
+                        <option value="9°Ano B">9ºAno B</option>
+                        <option value="9°Ano C">9ºAno C</option>
+                        <option value="1°Ano A">1ºAno A</option>
+                        <option value="1°Ano B">1ºAno B</option>
+                        <option value="2°Ano A">2ºAno A</option>
+                        <option value="2°Ano B">2ºAno B</option>
+                        <option value="3°Ano A">3ºAno A</option>
+                        <option value="3°Ano B">3ºAno B</option>
+                    </select>
+                </div>
+                <div class="filtro-status-style">
+                    <select name="Status" id="filtroStatus" class="filtro">
+                        <option value="todos">Todos</option>
+                        <option value="online">Online</option>
+                        <option value="offline">Offline</option>
+                    </select>
+                </div>
+            </div>
             <table class="tabela" id="tabela">
                 <thead>
                     <tr>

@@ -37,23 +37,15 @@
 
                 const linha = document.createElement("tr");
                 linha.innerHTML = `
-                    <td class="computador"><strong>${maquina.Hostname}</strong></td>
-                    <td>${maquina.Professor}</td>
-                    <td>${maquina.Turma}</td>
+                    <td><strong>${maquina.Hostname}</strong></td>
                     <td>${maquina.Aluno}</td>
-                    <td>
-                        <span class="badge ${classeStatus} status">
-                            ${maquina.Status}
-                        </span>
-                    </td>
+                    <td>${maquina.Turma}</td>
+                    <td><span class="badge ${classeStatus}">${maquina.Status}</span></td>
                 `;
                 tabelaCorpo.appendChild(linha);
             });
 
             totalMaquinas.textContent = `${onlineCount} Online de ${dados.length} máquinas monitoradas`;
-
-            filtrarStatus();
-            filtrarTurma();
 
         } catch (error) {
             console.error("Erro ao buscar dados:", error);
@@ -104,71 +96,3 @@
             }
         }
     }
-
-
-
-
-
-// FILTROS ----------------------------------------------------------
-
-function filtrarStatus() {
-
-    const filtro = document
-        .getElementById("filtroStatus")
-        .value
-        .toLowerCase();
-
-    const tabela = document.getElementById("tabela");
-
-    const linhas = tabela
-        .getElementsByTagName("tbody")[0]
-        .getElementsByTagName("tr");
-
-    for (let i = 0; i < linhas.length; i++) {
-
-        const status = linhas[i]
-            .querySelector(".status")
-            .textContent
-            .trim()
-            .toLowerCase();
-
-        if (filtro === "todos") {
-
-            linhas[i].style.display = "";
-
-        } else if (status === filtro) {
-
-            linhas[i].style.display = "";
-
-        } else {
-
-            linhas[i].style.display = "none";
-
-        }
-
-    }
-
-}
-
-function filtrarTurma() {
-
-    const filtro = document.getElementById("filtroTurma").value;
-    console.log("Filtro:", filtro);
-
-    const linhas = document.querySelectorAll("#tabelaCorpo tr");
-
-    linhas.forEach((linha, i) => {
-
-        const turma = linha.cells[2].textContent.trim();
-
-        console.log(`Linha ${i}: ${turma}`);
-
-        if (filtro === "todas" || turma === filtro) {
-            linha.style.display = "";
-        } else {
-            linha.style.display = "none";
-        }
-
-    });
-
-}   

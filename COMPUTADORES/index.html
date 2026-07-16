@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MSIE Saiba mais</title>
+    <title>MSIE Computadores</title>
     <link rel="stylesheet" href="../DASHBOARD/style.css">
 </head>
 <style>
@@ -12,14 +12,23 @@
         position: absolute;
         background-color: rgba(7, 0, 81, 0.25);
         left: 0;
-        margin-top: 250px;
+        margin-top: 50px;
         width: 15vw;
         height: 50px;
     }
 </style>
 <body>
     <header class="header">
-        <h1>SAIBA MAIS</h1>
+        <h1>DASHBOARD</h1>
+        <form class="barra-pesquisa">
+            <input type="text" id="textInput" onkeyup="filtrarTabela()" placeholder="O que você procura?">
+            <button type="submit">
+                <img src="https://cdn-icons-png.flaticon.com/512/3183/3183361.png" width="15px" alt="">
+            </button>
+        </form>
+        <div class="status-contador" id="totalMaquinas">
+            Conectando...
+        </div>
     </header>
 
     
@@ -37,11 +46,29 @@
                 </ul>
             </nav>
         </aside>
+    
+    <div class="container">
+        <main class="main-content">
+            <div id="msgErro"></div>
+            <table class="tabela" style="width: 50vw;" id="tabela">
+                <thead>
+                    <tr>
+                        <th>Computador (Hostname)</th>
+                        <th>Alunos</th>
+                        <th>Turma</th>
+                        <th>Status Atual</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaCorpo">
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: #777; ">Buscando dados do servidor...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
 
-        <div class="container">
-            <main class="main-content">
-                <h1>DEVS</h1>
-            </main>
-        </div>
+    <!-- Código JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>

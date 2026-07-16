@@ -50,9 +50,10 @@
             background-image: linear-gradient(135deg, rgb(33, 75, 191), rgb(0, 44, 106));
             color: #f9f9f9;
             width: 15vw;
-            padding: 20px;
+            padding: 20px 0;
         }
         .nav-sidebar li {
+            position: relative;
             list-style: none;
         }
         .nav-a {
@@ -62,16 +63,27 @@
             margin-left: 20px;
             line-height: 50px;
             font-weight: 400;
+            transition: all ease 0.2s;
         }
         .nav-a:hover {
-            transition: all 0.2s ease;
-            transform: scale(1.025);
+            font-size: 21px;
             font-weight: 600;
             text-decoration: dashed;
         }
+        .nav-a-div {
+            position: absolute;
+            width: 15vw;
+            height: 50px;
+            left: 0;
+            padding-left: 20px;
+        }
+        .nav-a-div:hover {
+            background-color: rgba(10, 0, 120, 0.381);
+        }
+        
 
         .main-content {
-            padding: 50px 0 ;
+            padding: 10px 0 ;
         }
 
         /* TABELA */
@@ -171,26 +183,22 @@
     cursor: pointer; 
     font-size: 18px; 
 }
-.linha-encontrada{
-    background:#ffe58f !important;
-    transition:0.4s;
-    animation: piscar 1s ease-in-out 3;
+
+/* FILTROS --------------------- */
+.filtros {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: right;
+    align-items: center;
+    gap: 20px;
+    margin: 20px;
 }
-
-@keyframes piscar{
-
-    0%{
-        background:#fff8d4;
-    }
-
-    50%{
-        background:#ffd54f;
-    }
-
-    100%{
-        background:#fff8d4;
-    }
-
+.filtro {
+    background-color: #052864;
+    color: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    padding: 5px 10px;
+    border-radius: 10px;
 }
 
         
