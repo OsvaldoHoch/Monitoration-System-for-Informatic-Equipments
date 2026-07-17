@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GERENCIAMENTO DE PROFESSORES</title>
+    <link rel="stylesheet" href="../DASHBOARD/style.css">
+</head>
+<style>
+    .selected {
+        z-index: 10;
+        position: absolute;
+        background-color: rgba(7, 0, 81, 0.25);
+        left: 0;
+        margin-top: 200px;
+        width: 15vw;
+        height: 50px;
+    }
+</style>
+<body>
+    <header class="header">
+        <h1>GERENCIAMENTO DE PROFESSORES</h1>
+        <form class="barra-pesquisa" onsubmit="event.preventDefault();">
+            <input type="text" id="textInput" onkeyup="filtrarTabela()" placeholder="Buscar por professor...">
+            <button type="button">
+                <img src="https://cdn-icons-png.flaticon.com/512/3183/3183361.png" width="15px" alt="">
+            </button>
+        </form>
+    </header>
+
+    <aside class="sidebar">
+             <img src="../imgs/LogoDinorah.png" width="200px" style="margin-left: 10px;" alt="">
+        <nav class="nav-sidebar">
+            <ul>
+                <div class="selected"></div>
+                <li><a class="nav-a" href="../DASHBOARD/index.html"><div class="nav-a-div">DASHBOARD</div></a></li>
+                <li><a class="nav-a" href="../COMPUTADORES/index.html"><div class="nav-a-div">COMPUTADORES</div></a></li>
+                <li><a class="nav-a" href="../TURMAS/index.html"><div class="nav-a-div">TURMAS</div></a></li>
+                <li><a class="nav-a" href="../ALUNOS/index.html"><div class="nav-a-div">ALUNOS</div></a></li>
+                <li><a class="nav-a" href="../PROFESSORES/index.html"><div class="nav-a-div">PROFESSORES</div></a></li>
+                <li><a class="nav-a" href="../SAIBA-MAIS/index.html"><div class="nav-a-div">SAIBA MAIS</div></a></li>
+            </ul>
+        </nav>
+    </aside>
+    
+    <div class="container">
+        <main class="main-content">
+            <div id="msgErro"></div>
+            
+            <button class="btn-cadastrar-novo" onclick="abrirModalCadastro()">+ Cadastrar Novo Professor</button>
+
+            <table class="tabela" id="tabela">
+                <thead>
+                    <tr>
+                        <th style="width: 80px;">ID</th>
+                        <th>Nome do Professor</th>
+                        <th style="width: 180px; text-align: center;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaCorpo">
+                    <tr>
+                        <td colspan="3" style="text-align: center; color: #777;">Buscando dados do servidor...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+    <div id="teacherModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Cadastrar Novo Professor</h2>
+                <button class="close-btn" onclick="fecharModal()">&times;</button>
+            </div>
+            <form id="teacherForm" onsubmit="salvarProfessor(event)">
+                <input type="hidden" id="professorId">
+                
+                <div class="form-group">
+                    <label for="professorNome">Nome Completo:</label>
+                    <input type="text" id="professorNome" required placeholder="Ex: Cláudio Souza Silva">
+                </div>
+                
+                <div class="btn-container">
+                    <button type="button" class="btn btn-secondary" onclick="fecharModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btnSalvar">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../DASHBOARD/script.js"></script>
+</body>
+</html>

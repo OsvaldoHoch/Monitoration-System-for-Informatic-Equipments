@@ -6,10 +6,11 @@
         /* border: 1px solid red; */
     }
 
-    body {
+    html, body {
             background-color: #f4f6f9;
             color: #090909;
-            padding: 0px;
+            padding: 0;
+            margin: 0;
         }
 
         .container {
@@ -35,7 +36,7 @@
             color: white;
             padding: 20px 50px;
             display: flex;
-            justify-content: space-between;
+            justify-content: left;
             align-items: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
@@ -78,7 +79,7 @@
             padding-left: 20px;
         }
         .nav-a-div:hover {
-            background-color: rgba(10, 0, 120, 0.381);
+            background-image: linear-gradient(to right, rgba(10, 0, 120, 0.381), rgba(10, 0, 120, 0.1));
         }
         
 
@@ -89,6 +90,8 @@
         /* TABELA */
 
         .status-contador {
+            position: fixed;
+            right: 20px;
             background-color: #f5b400;
             color: #2d2d2d;
             padding: 8px 15px;
@@ -162,6 +165,8 @@
 
     /* BARRA DE PESQUISA */
 .barra-pesquisa {
+    position: absolute;
+    left: 42.5vw;
     display: flex;
     align-items: center;
     background-color: #f1f1f1;
@@ -194,11 +199,114 @@
     margin: 20px;
 }
 .filtro {
-    background-color: #052864;
-    color: #f1f1f1;
-    border: 1px solid #f1f1f1;
+    background-color: #fff;
+    color: #052864;
+    border: 2px solid #052864;
     padding: 5px 10px;
     border-radius: 10px;
 }
-
+/* Estilos básicos para o Modal de CRUD */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            width: 400px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.3rem;
+            color: #0d47a1;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #fff;
+            font-family: inherit;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-primary { 
+            background-color: #0d47a1; color: white; 
+        }
+        .btn-secondary { 
+            background-color: #ccc; color: #333; 
+        }
+        .btn-cadastrar-novo {
+            background-color: #2e7d32;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .actions-cell button {
+            margin-right: 5px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .btn-edit { 
+            background-color: #ffb300; color: #fff; 
+        }
+        .btn-delete { 
+            background-color: #d32f2f; color: #fff; 
+        }
         

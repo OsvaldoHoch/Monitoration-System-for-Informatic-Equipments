@@ -52,8 +52,7 @@
 
             totalMaquinas.textContent = `${onlineCount} Online de ${dados.length} máquinas monitoradas`;
 
-            filtrarStatus();
-            filtrarTurma();
+            aplicarFiltros();
 
         } catch (error) {
             console.error("Erro ao buscar dados:", error);
@@ -111,59 +110,39 @@
 
 // FILTROS ----------------------------------------------------------
 
-function filtrarStatus() {
+function aplicarFiltros() {
 
-    const filtro = document
+    const filtroStatus = document
         .getElementById("filtroStatus")
         .value
         .toLowerCase();
 
-    const tabela = document.getElementById("tabela");
+    const filtroTurma = document
+        .getElementById("filtroTurma")
+        .value;
 
-    const linhas = tabela
-        .getElementsByTagName("tbody")[0]
-        .getElementsByTagName("tr");
+    const linhas = document.querySelectorAll("#tabelaCorpo tr");
 
-    for (let i = 0; i < linhas.length; i++) {
+    linhas.forEach(linha => {
 
-        const status = linhas[i]
-            .querySelector(".status")
+        const status = linha.querySelector(".status")
             .textContent
             .trim()
             .toLowerCase();
 
-        if (filtro === "todos") {
+        const turma = linha.cells[2]
+            .textContent
+            .trim();
 
-            linhas[i].style.display = "";
+        const passouStatus =
+            filtroStatus === "todos" ||
+            status === filtroStatus;
 
-        } else if (status === filtro) {
+        const passouTurma =
+            filtroTurma === "todas" ||
+            turma === filtroTurma;
 
-            linhas[i].style.display = "";
-
-        } else {
-
-            linhas[i].style.display = "none";
-
-        }
-
-    }
-
-}
-
-function filtrarTurma() {
-
-    const filtro = document.getElementById("filtroTurma").value;
-    console.log("Filtro:", filtro);
-
-    const linhas = document.querySelectorAll("#tabelaCorpo tr");
-
-    linhas.forEach((linha, i) => {
-
-        const turma = linha.cells[2].textContent.trim();
-
-        console.log(`Linha ${i}: ${turma}`);
-
-        if (filtro === "todas" || turma === filtro) {
+        if (passouStatus && passouTurma) {
             linha.style.display = "";
         } else {
             linha.style.display = "none";
@@ -171,4 +150,4 @@ function filtrarTurma() {
 
     });
 
-}   
+}
