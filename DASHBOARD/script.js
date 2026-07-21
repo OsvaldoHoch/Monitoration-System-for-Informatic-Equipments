@@ -1,5 +1,5 @@
     const IP_SERVIDOR = "MININT-CDV84OR.local";
-    const IP_SERVIDOR_ALT = "192.168.137.102";
+    const IP_SERVIDOR_ALT = "172.30.0.117";
     const URL_API = `http://${IP_SERVIDOR}:5000/api/monitoramento/status`;
 
     async function atualizarPainel() {

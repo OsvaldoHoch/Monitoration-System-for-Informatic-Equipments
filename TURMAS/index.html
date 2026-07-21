@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MSIE Dashboad</title>
+    <title>MSIE Turmas</title>
     <link rel="stylesheet" href="../DASHBOARD/style.css">
 </head>
 <style>
@@ -12,8 +12,13 @@
         position: absolute;
         background-color: rgba(7, 0, 81, 0.25);
         left: 0;
+        margin-top: 100px;
         width: 15vw;
         height: 50px;
+    }
+    .table-title {
+        font-size: 22px;
+        margin: 5px;
     }
 </style>
 <body>
@@ -84,7 +89,7 @@
                     </select>
                 </div>
             </div>
-            <table class="tabela" id="tabela">
+            <!-- <table class="tabela" id="tabela">
                 <thead>
                     <tr>
                         <th>Computador (Hostname)</th>
@@ -98,15 +103,26 @@
                     <tr>
                         <td colspan="5" style="text-align: center; color: #777; ">Buscando dados do servidor...</td>
                     </tr>
+                </tbody>
+            </table> -->
+            <div id="turmasContainer">
+                <table class="tabela" id="tabela">
+                <thead>
                     <tr>
-                        <!-- <td>NOTE-00</td>
-                        <td>TESTER 00</td>
-                        <td>6°Ano A</td>
-                        <td>BETA TESTER</td>
-                        <td>ON TEST</td> -->
+                        <th>Computador (Hostname)</th>
+                        <th>Professor(a)</th>
+                        <th>Turmas</th>
+                        <th>Aluno(a)</th>
+                        <th>Status Atual</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaCorpo">
+                    <tr>
+                        <td colspan="5" style="text-align: center; color: #777; ">Buscando dados do servidor...</td>
                     </tr>
                 </tbody>
             </table>
+            </div>
         </main>
     </div>
 

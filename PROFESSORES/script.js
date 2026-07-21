@@ -1,5 +1,5 @@
 // URL da sua API de Professores
-const API_URL = "http://localhost:5000/api/professores"; 
+const API_URL = "http://MININT-CDV84OR.local:5000/api/professores"; 
 
 const modal = document.getElementById("teacherModal");
 const modalTitle = document.getElementById("modalTitle");

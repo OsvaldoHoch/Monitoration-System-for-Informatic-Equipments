@@ -2,7 +2,7 @@
 const IP_SERVIDOR = "MININT-CDV84OR.local";
 const IP_SERVIDOR_ALT = "192.168.137.102";
 
-// Aponta para as APIs do seu backend C#
+// Aponta para as APIs do backend C#
 let URL_API = `http://${IP_SERVIDOR}:5000/api/alunos`; 
 let URL_TURMAS = `http://${IP_SERVIDOR}:5000/api/turmas`;
 
@@ -31,7 +31,7 @@ async function carregarTurmasNoSelect() {
     } catch (error) {
         console.warn("Tentando IP alternativo para buscar turmas...");
         try {
-            URL_TURMAS = `http://${IP_SERVIDOR_ALT}:5000/api/turmas`;
+            URL_TURMAS = `http://${IP_SERVIDOR}:5000/api/turmas`;
             let responseAlt = await fetch(URL_TURMAS);
             if (!responseAlt.ok) throw new Error("Erro no IP alternativo");
             
